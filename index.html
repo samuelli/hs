@@ -1,0 +1,180 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>UNSW High School Computing Club</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="bootstrap/css/docs.css" />
+<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" />
+<script src="bootstrap/js/jquery.min.js" type="text/javascript"></script>
+<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="bootstrap/js/bootswatch.js" type="text/javascript"></script>
+<script src="bootstrap/js/jquery.ui.core.min.js" type="text/javascript"></script>
+<script src="bootstrap/js/jquery.effects.core.min.js" type="text/javascript"></script>
+<script src="bootstrap/js/jquery.effects.slide.min.js" type="text/javascript"></script>
+<script src="http://malsup.github.com/jquery.form.js"></script> 
+<script type="text/javascript">
+$(document).ready(function () {
+   /*$('#introform').ajaxForm(function() {
+      alert("thanks");
+   });*/
+   $("#interestedBtn").click(function () {
+      $(this).hide();
+      $('#moreInfo').slideDown();
+   });
+   $("#findClassBtn").click(function () {
+      if ($('input[name=year]:checked').length == 0) {
+         $('#moreInfoError').show();
+         $('#year').addClass('error');
+         return false;
+      } else if ($('input[name=experience]:checked').length == 0) {
+         $('#moreInfoError').show();
+         $('#experience').addClass('error');
+         return false;
+      } else {
+         var year = $('input[name=year]:checked').val();
+         var experience = $('input[name=experience]:checked').val();
+         if (year > 11 && experience!='beginner') {
+            $('#hs1917').show();
+         } else if (experience=='beginner') {
+            $('#intro').show();
+         } else {
+            $('#none').show();
+         }
+         $('#moreInfo').hide();
+      }
+   });
+   $("#introSubmitBtn").click(function () {
+         $.each($('#intro input[type=text]'), function(i, v) {
+            console.log(v);
+            if (v.value == '') {
+               $('#introError').show();
+               $(v).parent().addClass('error');
+               console.log("error");
+               return false;
+            } else {
+               $(v).parent().removeClass('error');
+            }
+         });
+   });
+});
+</script>
+<style type="text/css">
+body {
+   font-family: "Open Sans";
+   font-weight: 300;
+   line-height:1.3em;
+   font-size:17px;
+   padding-top:50px;
+}
+label {
+   font-size:20px;
+   font-weight:600;
+   margin:20px 0;
+}
+form li {
+   margin: 10px 0;
+}
+input[type="radio"] {
+   margin-right:8px;
+}
+.alert {
+   font-size:17px;
+   margin:20px 0;
+}
+.container h1 {
+   margin-bottom:10px;
+}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head>
+<body> 
+   <div class="container well">
+         <header class="jumbotron subhead">
+         <h1>UNSW High School Computing Club</h1>
+         <p class="lead">Some shortish description explaining everything about thisJust a few more words here etc. Adding more to the description blah blah blah</p>
+         <p>Some more text</p>
+         </header>
+         <center><a class="btn btn-primary btn-large" href="#" id="interestedBtn">I'm interested</a></center>
+   </div>
+   <div id="moreInfo" class="container well" style="display:none">
+         <h1>Tell us a bit more about yourself</h1>
+         <div class="alert alert-error" style="display:none" id="moreInfoError">
+            Please fill in all fields.
+         </div>
+         <form class="form-vertical">
+            <fieldset>
+               <label>What year are you in?</label>
+               <div class="control-group" id="year">
+                  <ul style="list-style-type:none">
+                     <li><input type="radio" name="year" value="7">Year 7</input></li>
+                     <li><input type="radio" name="year" value="8">Year 8</input></li>
+                     <li><input type="radio" name="year" value="9">Year 9</input></li>
+                     <li><input type="radio" name="year" value="10">Year 10</input></li>
+                     <li><input type="radio" name="year" value="11">Year 11</input></li>
+                     <li><input type="radio" name="year" value="12">Year 12</input></li>
+               </div>
+               <label>What level of programming experience do you have?</label>
+               <div class="control-group" id="experience">
+                  <ul style="list-style-type:none">
+                     <li><input type="radio" name="experience" value="beginner">Beginner - I've done very little programming before</input></li>
+                     <li><input type="radio" name="experience" value="intermediate">Intermediate - I've done some programming before</input></li>
+                     <li><input type="radio" name="experience" value="expert">Expert - I've done lots of programming before but I'm keen to do some more programming!</input></li>
+                  </ul>
+               </div>
+               <center><a class="btn btn-primary btn-large" href="#" id="findClassBtn">Tell me what I can do!</a></center>
+            </fieldset>
+         </form>
+      </div>
+      <div id="intro" class="container well" style="display:none">
+         <h1>Intro to programming workshop</h1>
+         <p>Some details about this workshop</p>
+         <p>This workshop is about so and so</p>
+         <div class="alert alert-error" style="display:none" id="introError">
+            Please fill in all fields.
+         </div>
+         <form class="form-vertical" method="post" action="submitintro.cgi" enctype="multipart/form-data" id="introform">
+            <fieldset>
+               <label>Your name</label>
+               <div class="control-group">
+                  <input type="text" name="name">
+               </div>
+               <label>Your gender</label>
+               <div class="control-group">
+                  <ul style="list-style-type:none">
+                     <li><input type="radio" name="gender" value="Male">Male</input></li>
+                     <li><input type="radio" name="gender" value="Female">Female</input></li>
+                  </ul>
+               </div>
+               <label>Your email address</label>
+               <div class="control-group">
+                  <input type="text" name="email">
+               </div>
+               <label>High school you are attending</label>
+               <div class="control-group">
+                  <input type="text" name="highschool">
+               </div>
+               <label>Emergency contact name</label>
+               <div class="control-group">
+                  <input type="text" name="emergencyname">
+               </div>
+               <label>Emergency contact number</label>
+               <div class="control-group">
+                  <input type="text" name="emergencynumber">
+               </div>
+               <center><input type="submit" value="Apply" class="btn btn-primary btn-large" id="introSubmitBtn"></input></center>
+            </fieldset>
+         </form>
+      </div>
+      <div id="hs1917" class="container well" style="display:none">
+         <h1>hs1917</h1>
+      </div>
+      <div id="none" class="container well" style="display:none">
+         <h1>none</h1>
+      </div>
+   </div>
+</body>
+</html>
