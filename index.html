@@ -5,7 +5,7 @@
 <head>
 <title>UNSW High School Computing Club</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,700' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="bootstrap/css/docs.css" />
 <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" />
@@ -18,47 +18,74 @@
 <script src="http://malsup.github.com/jquery.form.js"></script> 
 <script type="text/javascript">
 $(document).ready(function () {
-   /*$('#introform').ajaxForm(function() {
-      alert("thanks");
-   });*/
+   $('#introform').ajaxForm(function() {
+   });
+   $('#noneform').ajaxForm(function() {
+   });
    $("#interestedBtn").click(function () {
-      $(this).hide();
+      $('#desc').slideUp();
       $('#moreInfo').slideDown();
    });
    $("#findClassBtn").click(function () {
       if ($('input[name=year]:checked').length == 0) {
-         $('#moreInfoError').show();
+         $('#moreInfoError').slideDown();
          $('#year').addClass('error');
-         return false;
       } else if ($('input[name=experience]:checked').length == 0) {
-         $('#moreInfoError').show();
+         $('#moreInfoError').slideDown();
          $('#experience').addClass('error');
-         return false;
       } else {
          var year = $('input[name=year]:checked').val();
          var experience = $('input[name=experience]:checked').val();
-         if (year > 11 && experience!='beginner') {
-            $('#hs1917').show();
+         if (year >= 10 && experience!='beginner') {
+            $('#hs1917').slideDown();
          } else if (experience=='beginner') {
-            $('#intro').show();
+            $('#intro').slideDown();
+            $('#introyear').val(year);
+            $('#introexperience').val(experience);
          } else {
-            $('#none').show();
+            $('#noneyear').val(year);
+            $('#noneexperience').val(experience);
+            $('#none').slideDown();
          }
-         $('#moreInfo').hide();
+         $('#moreInfo').slideUp();
       }
+      return false;
    });
    $("#introSubmitBtn").click(function () {
+         var valid = true;
          $.each($('#intro input[type=text]'), function(i, v) {
-            console.log(v);
             if (v.value == '') {
-               $('#introError').show();
+               $('#introError').slideDown();
                $(v).parent().addClass('error');
-               console.log("error");
+               valid = false;
                return false;
             } else {
                $(v).parent().removeClass('error');
             }
          });
+         if (valid) {
+            $('#intro').slideUp();
+            $('#introthanksemail').html($('#intro input[name=email]').val());
+            $('#introthanksname').html($('#intro input[name=name]').val());
+            $('#introthanks').slideDown();
+         }
+   });
+   $("#noneSubmitBtn").click(function () {
+         var valid = true;
+         $.each($('#none input[type=text]'), function(i, v) {
+            if (v.value == '') {
+               $('#introError').slideDown();
+               $(v).parent().addClass('error');
+               valid = false;
+               return false;
+            } else {
+               $(v).parent().removeClass('error');
+            }
+         });
+         if (valid) {
+            $('#none').slideUp();
+            $('#nonethanks').slideDown();
+         }
    });
 });
 </script>
@@ -96,9 +123,14 @@ input[type="radio"] {
          <header class="jumbotron subhead">
          <h1>UNSW High School Computing Club</h1>
          <p class="lead">Some shortish description explaining everything about thisJust a few more words here etc. Adding more to the description blah blah blah</p>
-         <p>Some more text</p>
          </header>
-         <center><a class="btn btn-primary btn-large" href="#" id="interestedBtn">I'm interested</a></center>
+         <div id="desc">
+            <p>Some more text</p>
+            <p>Some more text</p>
+            <p>Some more text</p>
+            <p>Some more text</p>
+            <center><a class="btn btn-primary btn-large" href="#" id="interestedBtn">I'm interested</a></center>
+         </div>
    </div>
    <div id="moreInfo" class="container well" style="display:none">
          <h1>Tell us a bit more about yourself</h1>
@@ -136,7 +168,9 @@ input[type="radio"] {
          <div class="alert alert-error" style="display:none" id="introError">
             Please fill in all fields.
          </div>
-         <form class="form-vertical" method="post" action="submitintro.cgi" enctype="multipart/form-data" id="introform">
+         <form class="form-vertical" method="post" action="http://cgi.cse.unsw.edu.au/~samli/hs/submitintro.cgi" enctype="multipart/form-data" id="introform">
+            <input type="hidden" name="year" value="-1" style="display:none" id="introyear">
+            <input type="hidden" name="experience" value="-1" style="display:none" id="introexperience">
             <fieldset>
                <label>Your name</label>
                <div class="control-group">
@@ -165,15 +199,43 @@ input[type="radio"] {
                <div class="control-group">
                   <input type="text" name="emergencynumber">
                </div>
-               <center><input type="submit" value="Apply" class="btn btn-primary btn-large" id="introSubmitBtn"></input></center>
+               <center><input type="submit" value="Apply" class="btn btn-primary btn-large" id="introSubmitBtn"></center>
             </fieldset>
          </form>
       </div>
+      <div id="introthanks" class="container well" style="display:none">
+         <h1>Thank you for registering, <span id="introthanksname"></span>!</h1>
+         <p>Thank for signing up to this workshop. You should receive an email shortly at <em><span id="introthanksemail"></span></em>.</p>
+         <p>If you have any queries or you do not receive an email please send an email to <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">csesoc.computerclub@cse.unsw.edu.au</a>.</p>
+      </div>
       <div id="hs1917" class="container well" style="display:none">
-         <h1>hs1917</h1>
+         <h1>UNSW Computing 1</h1>
+         <p>A limited number of talented high school students are offered the opportunity to enroll at UNSW and take COMP1917 entirely for <em>free</em>, our advanced first year university level course in computing.</p>
+         <p><em>Get a headstart</em> by completing this course which counts as university credit if you subsequently enroll at at UNSW Computing.</p>
+         <p>Find out more on this <a href="https://wiki.cse.unsw.edu.au/info/HS1917">webpage</a> and feel free to email <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">csesoc.computerclub@cse.unsw.edu.au</a> if you have any questions.</p>
       </div>
       <div id="none" class="container well" style="display:none">
-         <h1>none</h1>
+         <h1>Sorry, no suitable modules running right now</h1>
+         <p>Sorry, we have no suitable modules you might be interested in right now.</p>
+         <p>We will continue to provide new modules which may be of interest to you. If you wish to register your interest and be notified when new modules/courses are opened, please fill in the form below.</p>
+         <div class="alert alert-error" style="display:none" id="introError">
+            Please fill in all fields.
+         </div>
+         <form class="form-vertical" method="post" action="http://cgi.cse.unsw.edu.au/~samli/hs/submitinterest.cgi" enctype="multipart/form-data" id="noneform">
+            <input type="hidden" name="year" value="-1" style="display:none" id="noneyear">
+            <input type="hidden" name="experience" value="-1" style="display:none" id="noneexperience">
+            <fieldset>
+               <label>Your email address</label>
+               <div class="control-group">
+                  <input type="text" name="email">
+               </div>
+               <center><input type="submit" value="Notify me later" class="btn btn-primary btn-large" id="noneSubmitBtn"></center>
+            </fieldset>
+         </form>
+      </div>
+      <div id="nonethanks" class="container well" style="display:none">
+         <h1>Thank you for registering your interest</h1>
+         <p>If you have any queries please send an email to <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">csesoc.computerclub@cse.unsw.edu.au</a>.</p>
       </div>
    </div>
 </body>
