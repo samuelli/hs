@@ -22,6 +22,8 @@ $(document).ready(function () {
    });
    $('#noneform').ajaxForm(function() {
    });
+   $('#hsnoneform').ajaxForm(function() {
+   });
    $("#interestedBtn").click(function () {
       $('#desc').slideUp();
       $('#moreInfo').slideDown();
@@ -38,6 +40,9 @@ $(document).ready(function () {
          var experience = $('input[name=experience]:checked').val();
          if (year >= 10 && experience!='beginner') {
             $('#hs1917').slideDown();
+            $('#hsnoneyear').val(year);
+            $('#hsnoneexperience').val(experience);
+            $('#hs1917none').slideDown();
          } else if (experience=='beginner') {
             $('#intro').slideDown();
             $('#introyear').val(year);
@@ -87,6 +92,23 @@ $(document).ready(function () {
             $('#nonethanks').slideDown();
          }
    });
+   $("#hsnoneSubmitBtn").click(function () {
+         var valid = true;
+         $.each($('#hs1917none input[type=text]'), function(i, v) {
+            if (v.value == '') {
+               $('#introError').slideDown();
+               $(v).parent().addClass('error');
+               valid = false;
+               return false;
+            } else {
+               $(v).parent().removeClass('error');
+            }
+         });
+         if (valid) {
+            $('#hs1917none').slideUp();
+            $('#nonethanks').slideDown();
+         }
+   });
 });
 </script>
 <style type="text/css">
@@ -95,7 +117,7 @@ body {
    font-weight: 300;
    line-height:1.3em;
    font-size:17px;
-   padding-top:50px;
+   padding:50px 0px;
 }
 label {
    font-size:20px;
@@ -115,6 +137,9 @@ input[type="radio"] {
 .container h1 {
    margin-bottom:10px;
 }
+footer {
+   font-size:12px;
+}
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 </head>
@@ -122,7 +147,7 @@ input[type="radio"] {
    <div class="container well">
          <header class="jumbotron subhead">
          <h1>UNSW High School Computing Club</h1>
-         <p class="lead">Some shortish description explaining everything about thisJust a few more words here etc. Adding more to the description blah blah blah</p>
+         <p class="lead">Discover computing.</p>
          </header>
          <div id="desc">
             <p>Some more text</p>
@@ -237,6 +262,30 @@ input[type="radio"] {
          <h1>Thank you for registering your interest</h1>
          <p>If you have any queries please send an email to <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">csesoc.computerclub@cse.unsw.edu.au</a>.</p>
       </div>
+      <div id="hs1917none" class="container well" style="display:none">
+         <h1>Subscribe to new modules</h1>
+         <p>Sorry but we don't have any additional modules right now.</p>
+         <p>We will continue to provide new modules which may be of interest to you. If you wish to register your interest and be notified when new modules/courses are opened, please fill in the form below.</p>
+         <div class="alert alert-error" style="display:none" id="introError">
+            Please fill in all fields.
+         </div>
+         <form class="form-vertical" method="post" action="http://cgi.cse.unsw.edu.au/~samli/hs/submitinterest.cgi" enctype="multipart/form-data" id="hsnoneform">
+            <input type="hidden" name="year" value="-1" style="display:none" id="hsnoneyear">
+            <input type="hidden" name="experience" value="-1" style="display:none" id="hsnoneexperience">
+            <fieldset>
+               <label>Your email address</label>
+               <div class="control-group">
+                  <input type="text" name="email">
+               </div>
+               <center><input type="submit" value="Notify me later" class="btn btn-primary btn-large" id="hsnoneSubmitBtn"></center>
+            </fieldset>
+         </form>
+      </div>
    </div>
+   <footer class="container">
+   <center>
+      Presented by <a href="http://www.csesoc.unsw.edu.au">UNSW CSESoc</a> and <a href="http://www.cse.unsw.edu.au/">CSE@UNSW</a>
+   </center>
+   </footer>
 </body>
 </html>
