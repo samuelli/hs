@@ -8,6 +8,7 @@ print header;
 my $name = param("name");
 my $gender = param("gender");
 my $email = param("email");
+`echo $email >> introemails`;
 my $hs = param("highschool");
 my $emergencyname = param("emergencyname");
 my $emergencynumber = param("emergencynumber");

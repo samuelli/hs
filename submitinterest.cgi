@@ -6,6 +6,7 @@ use CGI::Session;
 
 print header;
 my $email = param("email");
+`echo $email >> interestemails`;
 my $year = param("year");
 my $experience = param("experience");
 `echo "Someone registered to the no list." | mail -aFrom:no-reply\@cse.unsw.edu.au -s "Computing Club" csesoc.computerclub\@cse.unsw.edu.au`;
