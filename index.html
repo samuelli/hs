@@ -68,6 +68,12 @@ $(document).ready(function () {
                $(v).parent().removeClass('error');
             }
          });
+         if ($('#intro input[name=gender]:checked').length == 0
+            || $('#intro input[name=laptop]:checked').length == 0) {
+            $('#introError').slideDown();
+            valid = false;
+            return false;
+         }
          if (valid) {
             $('#intro').slideUp();
             $('#introthanksemail').html($('#intro input[name=email]').val());
