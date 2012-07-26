@@ -85,7 +85,7 @@ $(document).ready(function () {
          var valid = true;
          $.each($('#none input[type=text]'), function(i, v) {
             if (v.value == '') {
-               $('#introError').slideDown();
+               $('#noneError').slideDown();
                $(v).parent().addClass('error');
                valid = false;
                return false;
@@ -96,13 +96,15 @@ $(document).ready(function () {
          if (valid) {
             $('#none').slideUp();
             $('#nonethanks').slideDown();
+         } else {
+            return false;
          }
    });
    $("#hsnoneSubmitBtn").click(function () {
          var valid = true;
          $.each($('#hs1917none input[type=text]'), function(i, v) {
             if (v.value == '') {
-               $('#introError').slideDown();
+               $('#hsnoneError').slideDown();
                $(v).parent().addClass('error');
                valid = false;
                return false;
@@ -113,6 +115,8 @@ $(document).ready(function () {
          if (valid) {
             $('#hs1917none').slideUp();
             $('#nonethanks').slideDown();
+         } else {
+            return false;
          }
    });
 });
@@ -288,7 +292,7 @@ and the programming language Python.</p>
          <h1>Sorry, no suitable modules running right now</h1>
          <p>Sorry, we have no suitable modules you might be interested in right now.</p>
          <p>We will continue to provide new modules which may be of interest to you. If you wish to register your interest and be notified when new modules/courses are opened, please fill in the form below.</p>
-         <div class="alert alert-error" style="display:none" id="introError">
+         <div class="alert alert-error" style="display:none" id="noneError">
             Please fill in all fields.
          </div>
          <form class="form-vertical" method="post" action="http://cgi.cse.unsw.edu.au/~samli/hs/submitinterest.cgi" enctype="multipart/form-data" id="noneform">
@@ -311,7 +315,7 @@ and the programming language Python.</p>
          <h1>Subscribe to new modules</h1>
          <p>Sorry but we don't have any additional modules right now.</p>
          <p>We will continue to provide new modules which may be of interest to you. If you wish to register your interest and be notified when new modules/courses are opened, please fill in the form below.</p>
-         <div class="alert alert-error" style="display:none" id="introError">
+         <div class="alert alert-error" style="display:none" id="hsnoneError">
             Please fill in all fields.
          </div>
          <form class="form-vertical" method="post" action="http://cgi.cse.unsw.edu.au/~samli/hs/submitinterest.cgi" enctype="multipart/form-data" id="hsnoneform">
