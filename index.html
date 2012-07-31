@@ -1,341 +1,436 @@
 <!DOCTYPE html
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
 <head>
-<title>UNSW High School Computing Club</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,700' rel='stylesheet' type='text/css'>
-<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="bootstrap/css/docs.css" />
-<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" />
-<script src="bootstrap/js/jquery.min.js" type="text/javascript"></script>
-<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="bootstrap/js/bootswatch.js" type="text/javascript"></script>
-<script src="bootstrap/js/jquery.ui.core.min.js" type="text/javascript"></script>
-<script src="bootstrap/js/jquery.effects.core.min.js" type="text/javascript"></script>
-<script src="bootstrap/js/jquery.effects.slide.min.js" type="text/javascript"></script>
-<script src="bootstrap/js/jquery.form.js"></script> 
-<script type="text/javascript">
-$(document).ready(function () {
-   $('#introform').ajaxForm(function() {
-   });
-   $('#noneform').ajaxForm(function() {
-   });
-   $('#hsnoneform').ajaxForm(function() {
-   });
-   $("#interestedBtn").click(function () {
-      $('#desc').slideUp();
-      $('#moreInfo').slideDown();
-   });
-   $("#findClassBtn").click(function () {
-      if ($('input[name=year]:checked').length == 0) {
-         $('#moreInfoError').slideDown();
-         $('#year').addClass('error');
-      } else if ($('input[name=experience]:checked').length == 0) {
-         $('#moreInfoError').slideDown();
-         $('#experience').addClass('error');
-      } else {
-         var year = $('input[name=year]:checked').val();
-         var experience = $('input[name=experience]:checked').val();
-         if (year >= 10 && experience!='beginner') {
-            $('#hs1917').slideDown();
-            $('#hsnoneyear').val(year);
-            $('#hsnoneexperience').val(experience);
-            $('#hs1917none').slideDown();
-         } else if (experience=='beginner') {
-            $('#intro').slideDown();
-            $('#introyear').val(year);
-            $('#introexperience').val(experience);
-         } else {
-            $('#noneyear').val(year);
-            $('#noneexperience').val(experience);
-            $('#none').slideDown();
-         }
-         $('#moreInfo').slideUp();
-      }
-      return false;
-   });
-   $("#introSubmitBtn").click(function () {
-         var valid = true;
-         $.each($('#intro input[type=text]'), function(i, v) {
-            if (v.value == '') {
-               $('#introError').slideDown();
-               $(v).parent().addClass('error');
-               valid = false;
-               return false;
-            } else {
-               $(v).parent().removeClass('error');
-            }
-         });
-         if ($('#intro input[name=gender]:checked').length == 0
-            || $('#intro input[name=laptop]:checked').length == 0) {
-            $('#introError').slideDown();
-            valid = false;
-            return false;
-         }
-         if (valid) {
-            $('#intro').slideUp();
-            $('#introthanksemail').html($('#intro input[name=email]').val());
-            $('#introthanksname').html($('#intro input[name=name]').val());
-            $('#introthanks').slideDown();
-         }
-   });
-   $("#noneSubmitBtn").click(function () {
-         var valid = true;
-         $.each($('#none input[type=text]'), function(i, v) {
-            if (v.value == '') {
-               $('#noneError').slideDown();
-               $(v).parent().addClass('error');
-               valid = false;
-               return false;
-            } else {
-               $(v).parent().removeClass('error');
-            }
-         });
-         if (valid) {
-            $('#none').slideUp();
-            $('#nonethanks').slideDown();
-         } else {
-            return false;
-         }
-   });
-   $("#hsnoneSubmitBtn").click(function () {
-         var valid = true;
-         $.each($('#hs1917none input[type=text]'), function(i, v) {
-            if (v.value == '') {
-               $('#hsnoneError').slideDown();
-               $(v).parent().addClass('error');
-               valid = false;
-               return false;
-            } else {
-               $(v).parent().removeClass('error');
-            }
-         });
-         if (valid) {
-            $('#hs1917none').slideUp();
-            $('#nonethanks').slideDown();
-         } else {
-            return false;
-         }
-   });
-});
-</script>
-<style type="text/css">
-body {
-   font-family: "Open Sans";
-   font-weight: 300;
-   line-height:1.6em;
-   font-size:17px;
-   padding:50px 0px;
-}
-label {
-   font-size:20px;
-   font-weight:600;
-   margin:20px 0;
-}
-form li {
-   margin: 10px 0;
-}
-input[type="radio"] {
-   margin-right:8px;
-}
-.alert {
-   font-size:17px;
-   margin:20px 0;
-}
-.container h1 {
-   margin-bottom:10px;
-}
-footer {
-   font-size:12px;
-}
-h2 {
-   margin:30px 0 10px;
-}
-h1, h2, h3, h4, h5, h6 {
-   font-weight:600;
-}
-strong {
-   font-weight:600;
-}
-.container {
-   max-width: 1000px;
-}
-</style>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<title>UNSW High School Computing Club</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/docs.css" />
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" />
+	<script src="bootstrap/js/jquery.min.js" type="text/javascript"></script>
+	<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="bootstrap/js/bootswatch.js" type="text/javascript"></script>
+	<script src="bootstrap/js/jquery.ui.core.min.js" type="text/javascript"></script>
+	<script src="bootstrap/js/jquery.effects.core.min.js" type="text/javascript"></script>
+	<script src="bootstrap/js/jquery.effects.slide.min.js" type="text/javascript"></script>
+	<script src="bootstrap/js/jquery.form.js"></script> 
+	<script type="text/javascript">
+	$(document).ready(function () {
+		$('#introform').ajaxForm(function() {
+		});
+		$('#noneform').ajaxForm(function() {
+		});
+		$('#hsnoneform').ajaxForm(function() {
+		});
+		$("#interestedBtn").click(function () {
+			$('#desc').slideUp();
+			$('#moreInfo').slideDown();
+		});
+		$("#findClassBtn").click(function () {
+			if ($('input[name=year]:checked').length == 0) {
+				$('#moreInfoError').slideDown();
+				$('#year').addClass('error');
+			} else if ($('input[name=experience]:checked').length == 0) {
+				$('#moreInfoError').slideDown();
+				$('#experience').addClass('error');
+			} else {
+				var year = $('input[name=year]:checked').val();
+				var experience = $('input[name=experience]:checked').val();
+				if (year >= 10 && experience!='beginner') {
+					$('#hs1917').slideDown();
+					$('#hsnoneyear').val(year);
+					$('#hsnoneexperience').val(experience);
+					$('#hs1917none').slideDown();
+				} else if (experience=='beginner') {
+					$('#intro').slideDown();
+					$('#introyear').val(year);
+					$('#introexperience').val(experience);
+				} else {
+					$('#noneyear').val(year);
+					$('#noneexperience').val(experience);
+					$('#none').slideDown();
+				}
+				$('#moreInfo').slideUp();
+			}
+			return false;
+		});
+		$("#introSubmitBtn").click(function () {
+			var valid = true;
+			$.each($('#intro input[type=text]'), function(i, v) {
+				if (v.value == '') {
+					$('#introError').slideDown();
+					$(v).parent().addClass('error');
+					valid = false;
+					return false;
+				} else {
+					$(v).parent().removeClass('error');
+				}
+			});
+			if ($('#intro input[name=gender]:checked').length == 0
+			|| $('#intro input[name=laptop]:checked').length == 0) {
+				$('#introError').slideDown();
+				valid = false;
+				return false;
+			}
+			if (valid) {
+				$('#intro').slideUp();
+				$('#introthanksemail').html($('#intro input[name=email]').val());
+				$('#introthanksname').html($('#intro input[name=name]').val());
+				$('#introthanks').slideDown();
+			}
+		});
+		$("#noneSubmitBtn").click(function () {
+			var valid = true;
+			$.each($('#none input[type=text]'), function(i, v) {
+				if (v.value == '') {
+					$('#noneError').slideDown();
+					$(v).parent().addClass('error');
+					valid = false;
+					return false;
+				} else {
+					$(v).parent().removeClass('error');
+				}
+			});
+			if (valid) {
+				$('#none').slideUp();
+				$('#nonethanks').slideDown();
+			} else {
+				return false;
+			}
+		});
+		$("#hsnoneSubmitBtn").click(function () {
+			var valid = true;
+			$.each($('#hs1917none input[type=text]'), function(i, v) {
+				if (v.value == '') {
+					$('#hsnoneError').slideDown();
+					$(v).parent().addClass('error');
+					valid = false;
+					return false;
+				} else {
+					$(v).parent().removeClass('error');
+				}
+			});
+			if (valid) {
+				$('#hs1917none').slideUp();
+				$('#nonethanks').slideDown();
+			} else {
+				return false;
+			}
+		});
+		$("#course").click(function () {
+			$('#intro').slideUp();
+			$('#introthanks').slideUp();
+			$('#none').slideUp();
+			$('#nonethanks').slideUp();
+			$('#moreInfo').slideUp();
+			$('#hs1917').slideUp();
+			$('#hs1917none').slideUp();
+			$('#desc').slideUp();
+			$('#jade2').slideUp();
+			$('#jade').slideDown();
+		});
+		$("#home").click(function () {
+			$('#intro').slideUp();
+			$('#introthanks').slideUp();
+			$('#none').slideUp();
+			$('#nonethanks').slideUp();
+			$('#moreInfo').slideUp();
+			$('#hs1917').slideUp();
+			$('#hs1917none').slideUp();
+			$('#jade').slideUp();
+			$('#jade2').slideUp();
+			$('#info').slideUp();
+			$('#desc').slideDown();
+		});
+		$("#about").click(function () {
+			$('#intro').slideUp();
+			$('#introthanks').slideUp();
+			$('#none').slideUp();
+			$('#nonethanks').slideUp();
+			$('#moreInfo').slideUp();
+			$('#hs1917').slideUp();
+			$('#hs1917none').slideUp();
+			$('#jade').slideUp();
+			$('#desc').slideUp();
+			$('#jade2').slideDown();
+		});
+		$("#infoBack").click(function () {
+			$('#moreInfo').slideUp();
+			$('#desc').slideDown();
+		});
+
+	});
+	</script>
+	<style type="text/css">
+	body {
+		font-family: "Open Sans";
+		font-weight: 300;
+		line-height:1.6em;
+		font-size:17px;
+		padding:50px 0px;
+	}
+	label {
+		font-size:20px;
+		font-weight:600;
+		margin:20px 0;
+	}
+	form li {
+		margin: 10px 0;
+	}
+	input[type="radio"] {
+		margin-right:8px;
+	}
+	.alert {
+		font-size:17px;
+		margin:20px 0;
+	}
+	.container h1 {
+		margin-bottom:10px;
+	}
+	footer {
+		font-size:12px;
+	}
+	h2 {
+		margin:30px 0 10px;
+	}
+	h1, h2, h3, h4, h5, h6 {
+		font-weight:600;
+	}
+	strong {
+		font-weight:600;
+	}
+	.container {
+		max-width: 1000px;
+	}
+	nav li{
+		display:inline;
+		color:#366DDC;
+		margin-right:20px;
+		margin-left:20px;
+	}
+
+	nav li:first-child {
+		margin-right:20px;
+		margin-left:0px;
+	}
+	nav li a:hover {
+		color:#FFB529;
+	}
+
+	img{
+		width:220px;
+		padding-right: 20px;
+		border-right: solid 2px #333;
+		margin-right: 18px;
+	}
+	#infoBack {
+		margin-right:20px;
+	}
+
+	</style>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 </head>
 <body> 
-   <div class="container well">
-         <header class="jumbotron subhead">
-         <h1>UNSW High School Computing Club</h1>
-         <p class="lead">Discover computing.</p>
-         </header>
-         <div id="desc">
-            <p>The UNSW Computing Club is an initiative started by the students of UNSW COMPUTING to introduce high school students to the world of the computing.</p>
-            <p>High school students will be able to learn a variety of basic skills involved in computing as well as broadening their understanding of the discipline.</p>
-            <p>Computing skills are important not only in the development of programs but also encourage strong methodical and creative thinking. These attributes are valued not only in computing but also in many other aspects of schooling and future careers.</p>
-            <center><a class="btn btn-primary btn-large" href="#" id="interestedBtn">I'm interested</a></center>
-         </div>
-   </div>
-   <div id="moreInfo" class="container well" style="display:none">
-         <h1>Tell us a bit more about yourself</h1>
-         <div class="alert alert-error" style="display:none" id="moreInfoError">
-            Please fill in all fields.
-         </div>
-         <form class="form-vertical">
-            <fieldset>
-               <label>What year are you in?</label>
-               <div class="control-group" id="year">
-                  <ul style="list-style-type:none">
-                     <li><input type="radio" name="year" value="7">Year 7</input></li>
-                     <li><input type="radio" name="year" value="8">Year 8</input></li>
-                     <li><input type="radio" name="year" value="9">Year 9</input></li>
-                     <li><input type="radio" name="year" value="10">Year 10</input></li>
-                     <li><input type="radio" name="year" value="11">Year 11</input></li>
-                     <li><input type="radio" name="year" value="12">Year 12</input></li>
-               </div>
-               <label>What level of programming experience do you have?</label>
-               <div class="control-group" id="experience">
-                  <ul style="list-style-type:none">
-                     <li><input type="radio" name="experience" value="beginner">Beginner - I've done very little or no programming before</input></li>
-                     <li><input type="radio" name="experience" value="intermediate">Intermediate - I've done some programming before</input></li>
-                     <li><input type="radio" name="experience" value="expert">Expert - I've done lots of programming before but I'm keen to do some more programming!</input></li>
-                  </ul>
-               </div>
-               <center><a class="btn btn-primary btn-large" href="#" id="findClassBtn">Tell me what I can do!</a></center>
-            </fieldset>
-         </form>
-      </div>
-      <div id="intro" class="container well" style="display:none">
-         <h1>Intro to Programming</h1>
-         <p>Our first course is aimed at introducing students with no prior knowledge of programming to good coding principles. Through this course, students will gain knowledge on the basics of code writing and how to approach problems and solve them with computers. Our approach is to present all this information through practical exercises, such as building small games and applications. </p>
+	<div class="container well">
+		<header class="jumbotron subhead">
 
-<p>More specifically, at the end of this course students will feel confident with: 
-variables, 
-if-else conditionals, 
-loops, 
-functions, 
-arithmetic in code, 
-true-false statements, 
-good coding style,
-using libraries/modules/documentation,
-classes
-and the programming language Python.</p>
+			<h1><img src="https://my.unsw.edu.au/images-portal/unsw_logo.png">High School Computing Club</h1>
+			<!-- <p class="lead">Discover computing.</p> -->
+		</header>
+		<nav>
+			<ul>
+				<li><a href="#" id="home">Home</a></li>
+				<li><a href="#" id="course">Courses</a></li>
+				<li><a href="#" id="about">About</a></li>
+			</ul>
+		</nav>
+	</div>
+</div>
 
-<p>We emphasize that this course is for students that have not previously programmed, and is paced so that these students have time to experiment with what they have learnt while also having time to ask questions.</p>
+<div id="desc" class="container well">
+	<p>The UNSW Computing Club is an initiative started by the students of UNSW's CSE School to help and educate high school students with an interest in computing. </p>
 
-<h2>Details</h2>
-    <p><strong>When</strong>: Weekly, 4pm until 6pm, on a day that has yet to be confirmed. Starting the week 6th of August</p>
-    <p><strong>Where</strong>: Located in UNSW COMPUTING labs, K17</p>
-	<p><strong>What to bring</strong>: Students are not required to bring anything for the course but may want to have a notebook, pen or laptop for note taking and possibly an afternoon snack.</p>
-   <p><strong>Cost</strong>: Free!</p>
-   <h2>Register</h2>
-   <p>Register your interest in this module below. Some details about the workshop are yet to be confirmed and you will receive additional information shortly after registering.
-         <div class="alert alert-error" style="display:none" id="introError">
-            Please fill in all fields.
-         </div>
-         <form class="form-vertical" method="post" action="http://cgi.cse.unsw.edu.au/~samli/hs/submitintro.cgi" enctype="multipart/form-data" id="introform">
-            <input type="hidden" name="year" value="-1" style="display:none" id="introyear">
-            <input type="hidden" name="experience" value="-1" style="display:none" id="introexperience">
-            <fieldset>
-               <label>Your full name</label>
-               <div class="control-group">
-                  <input type="text" name="name">
-               </div>
-               <label>Your gender</label>
-               <div class="control-group">
-                  <ul style="list-style-type:none">
-                     <li><input type="radio" name="gender" value="Male">Male</input></li>
-                     <li><input type="radio" name="gender" value="Female">Female</input></li>
-                  </ul>
-               </div>
-               <label>Your email address</label>
-               <div class="control-group">
-                  <input type="text" name="email">
-               </div>
-               <label>High school currently attending</label>
-               <div class="control-group">
-                  <input type="text" name="highschool">
-               </div>
-               <label>Emergency contact name</label>
-               <div class="control-group">
-                  <input type="text" name="emergencyname">
-               </div>
-               <label>Emergency contact number</label>
-               <div class="control-group">
-                  <input type="text" name="emergencynumber">
-               </div>
-               <label>Do you have access to a laptop that you can bring in?</label>
-               <div class="control-group">
-                  <ul style="list-style-type:none">
-                     <li><input type="radio" name="laptop" value="Yes">Yes</input></li>
-                     <li><input type="radio" name="laptop" value="No">No</input></li>
-                  </ul>
-               </div>
-               <center><input type="submit" value="Apply" class="btn btn-primary btn-large" id="introSubmitBtn"></center>
-            </fieldset>
-         </form>
-      </div>
-      <div id="introthanks" class="container well" style="display:none">
-         <h1>Thank you for registering, <span id="introthanksname"></span>!</h1>
-         <p>Thank for signing up to this workshop. You should receive an email shortly at <em><span id="introthanksemail"></span></em>.</p>
-         <p>If you have any queries or you do not receive an email please send an email to <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">csesoc.computerclub@cse.unsw.edu.au</a>.</p>
-      </div>
-      <div id="hs1917" class="container well" style="display:none">
-         <h1>UNSW Computing 1</h1>
-         <p>A limited number of talented high school students are offered the opportunity to enroll at UNSW and take COMP1917 entirely for <em>free</em>, our advanced first year university level course in computing.</p>
-         <p><em>Get a headstart</em> by completing this course which counts as university credit if you subsequently enroll at at UNSW Computing.</p>
-         <p>Find out more on this <a href="https://wiki.cse.unsw.edu.au/info/HS1917">webpage</a> and feel free to email <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">csesoc.computerclub@cse.unsw.edu.au</a> if you have any questions.</p>
-      </div>
-      <div id="none" class="container well" style="display:none">
-         <h1>Sorry, no suitable modules running right now</h1>
-         <p>Sorry, we have no suitable modules you might be interested in right now.</p>
-         <p>We will continue to provide new modules which may be of interest to you. If you wish to register your interest and be notified when new modules/courses are opened, please fill in the form below.</p>
-         <div class="alert alert-error" style="display:none" id="noneError">
-            Please fill in all fields.
-         </div>
-         <form class="form-vertical" method="post" action="http://cgi.cse.unsw.edu.au/~samli/hs/submitinterest.cgi" enctype="multipart/form-data" id="noneform">
-            <input type="hidden" name="year" value="-1" style="display:none" id="noneyear">
-            <input type="hidden" name="experience" value="-1" style="display:none" id="noneexperience">
-            <fieldset>
-               <label>Your email address</label>
-               <div class="control-group">
-                  <input type="text" name="email">
-               </div>
-               <center><input type="submit" value="Notify me later" class="btn btn-primary btn-large" id="noneSubmitBtn"></center>
-            </fieldset>
-         </form>
-      </div>
-      <div id="nonethanks" class="container well" style="display:none">
-         <h1>Thank you for registering your interest</h1>
-         <p>If you have any queries please send an email to <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">csesoc.computerclub@cse.unsw.edu.au</a>.</p>
-      </div>
-      <div id="hs1917none" class="container well" style="display:none">
-         <h1>Subscribe to new modules</h1>
-         <p>Sorry but we don't have any additional modules right now.</p>
-         <p>We will continue to provide new modules which may be of interest to you. If you wish to register your interest and be notified when new modules/courses are opened, please fill in the form below.</p>
-         <div class="alert alert-error" style="display:none" id="hsnoneError">
-            Please fill in all fields.
-         </div>
-         <form class="form-vertical" method="post" action="http://cgi.cse.unsw.edu.au/~samli/hs/submitinterest.cgi" enctype="multipart/form-data" id="hsnoneform">
-            <input type="hidden" name="year" value="-1" style="display:none" id="hsnoneyear">
-            <input type="hidden" name="experience" value="-1" style="display:none" id="hsnoneexperience">
-            <fieldset>
-               <label>Your email address</label>
-               <div class="control-group">
-                  <input type="text" name="email">
-               </div>
-               <center><input type="submit" value="Notify me later" class="btn btn-primary btn-large" id="hsnoneSubmitBtn"></center>
-            </fieldset>
-         </form>
-      </div>
-   </div>
-   <footer class="container">
-   <center>
-      Presented by <a href="http://www.csesoc.unsw.edu.au">UNSW CSESoc</a> and <a href="http://www.cse.unsw.edu.au/">CSE@UNSW</a>
-      &nbsp;|&nbsp; Contact us <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">here</a>
-   </center>
-   </footer>
-</body>
+	<p>Through the support of the club, high school students will be able to learn the basic skills of computing as well as broaden their understanding of the discipline. </p>
+
+	<p>Computing skills not only allow you to develop programs but they also build strong methodical and creative thinking, attributes that are valued not only in computing but also in many other aspects of their schooling and future careers.</p>
+	<center>
+		<a class="btn btn-primary btn-large" href="#" id="interestedBtn">I'm interested</a>
+	</center>
+</div>
+
+<div id="moreInfo" class="container well" style="display:none">
+	<h1>Tell us a bit more about yourself</h1>
+	<div class="alert alert-error" style="display:none" id="moreInfoError">
+		Please fill in all fields.
+	</div>
+	<form class="form-vertical">
+		<fieldset>
+			<label>What year are you in?</label>
+			<div class="control-group" id="year">
+				<ul style="list-style-type:none">
+					<li><input type="radio" name="year" value="7">Year 7</input></li>
+					<li><input type="radio" name="year" value="8">Year 8</input></li>
+					<li><input type="radio" name="year" value="9">Year 9</input></li>
+					<li><input type="radio" name="year" value="10">Year 10</input></li>
+					<li><input type="radio" name="year" value="11">Year 11</input></li>
+					<li><input type="radio" name="year" value="12">Year 12</input></li>
+				</div>
+				<label>What level of programming experience do you have?</label>
+				<div class="control-group" id="experience">
+					<ul style="list-style-type:none">
+						<li><input type="radio" name="experience" value="beginner">Beginner - I've done very little or no programming before</input></li>
+						<li><input type="radio" name="experience" value="intermediate">Intermediate - I've done some programming before</input></li>
+						<li><input type="radio" name="experience" value="expert">Expert - I've done lots of programming before but I'm keen to do some more programming!</input></li>
+					</ul>
+				</div>
+				<center>
+					<a class="btn btn-secondary btn-large" href="#" id="infoBack">Back</a>
+					<a class="btn btn-primary btn-large" href="#" id="findClassBtn">Tell me what I can do!</a>
+				</center>
+			</fieldset>
+		</form>
+	</div>
+
+	<div id="intro" class="container well" style="display:none">
+		<h1>Intro to Programming</h1>
+		<p>Our first course is aimed at introducing students with no prior knowledge of programming to good coding principles. Through this course, students will gain knowledge on the basics of code writing and how to approach problems and solve them with computers. Our approach is to present all this information through practical exercises, such as building small games and applications. </p>
+
+		<p>More specifically, at the end of this course students will feel confident with: 
+			variables, 
+			if-else conditionals, 
+			loops, 
+			functions, 
+			arithmetic in code, 
+			true-false statements, 
+			good coding style,
+			using libraries/modules/documentation,
+			classes
+			and the programming language Python.</p>
+
+			<p>We emphasize that this course is for students that have not previously programmed, and is paced so that these students have time to experiment with what they have learnt while also having time to ask questions.</p>
+
+			<h2>Details</h2>
+			<p><strong>When</strong>: Weekly, 4pm until 6pm, on a day that has yet to be confirmed. Starting the week 6th of August</p>
+			<p><strong>Where</strong>: Located in UNSW COMPUTING labs, K17</p>
+			<p><strong>What to bring</strong>: Students are not required to bring anything for the course but may want to have a notebook, pen or laptop for note taking and possibly an afternoon snack.</p>
+			<p><strong>Cost</strong>: Free!</p>
+			<h2>Register</h2>
+			<p>Register your interest in this module below. Some details about the workshop are yet to be confirmed and you will receive additional information shortly after registering.
+				<div class="alert alert-error" style="display:none" id="introError">
+					Please fill in all fields.
+				</div>
+				<form class="form-vertical" method="post" action="http://cgi.cse.unsw.edu.au/~samli/hs/submitintro.cgi" enctype="multipart/form-data" id="introform">
+					<input type="hidden" name="year" value="-1" style="display:none" id="introyear">
+					<input type="hidden" name="experience" value="-1" style="display:none" id="introexperience">
+					<fieldset>
+						<label>Your full name</label>
+						<div class="control-group">
+							<input type="text" name="name">
+						</div>
+						<label>Your gender</label>
+						<div class="control-group">
+							<ul style="list-style-type:none">
+								<li><input type="radio" name="gender" value="Male">Male</input></li>
+								<li><input type="radio" name="gender" value="Female">Female</input></li>
+							</ul>
+						</div>
+						<label>Your email address</label>
+						<div class="control-group">
+							<input type="text" name="email">
+						</div>
+						<label>High school currently attending</label>
+						<div class="control-group">
+							<input type="text" name="highschool">
+						</div>
+						<label>Emergency contact name</label>
+						<div class="control-group">
+							<input type="text" name="emergencyname">
+						</div>
+						<label>Emergency contact number</label>
+						<div class="control-group">
+							<input type="text" name="emergencynumber">
+						</div>
+						<label>Do you have access to a laptop that you can bring in?</label>
+						<div class="control-group">
+							<ul style="list-style-type:none">
+								<li><input type="radio" name="laptop" value="Yes">Yes</input></li>
+								<li><input type="radio" name="laptop" value="No">No</input></li>
+							</ul>
+						</div>
+						<center><input type="submit" value="Apply" class="btn btn-primary btn-large" id="introSubmitBtn"></center>
+					</fieldset>
+				</form>
+			</div>
+			<div id="introthanks" class="container well" style="display:none">
+				<h1>Thank you for registering, <span id="introthanksname"></span>!</h1>
+				<p>Thank for signing up to this workshop. You should receive an email shortly at <em><span id="introthanksemail"></span></em>.</p>
+				<p>If you have any queries or you do not receive an email please send an email to <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">csesoc.computerclub@cse.unsw.edu.au</a>.</p>
+			</div>
+			<div id="hs1917" class="container well" style="display:none">
+				<h1>UNSW Computing 1</h1>
+				<p>A limited number of talented high school students are offered the opportunity to enroll at UNSW and take COMP1917 entirely for <em>free</em>, our advanced first year university level course in computing.</p>
+				<p><em>Get a headstart</em> by completing this course which counts as university credit if you subsequently enroll at at UNSW Computing.</p>
+				<p>Find out more on this <a href="https://wiki.cse.unsw.edu.au/info/HS1917">webpage</a> and feel free to email <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">csesoc.computerclub@cse.unsw.edu.au</a> if you have any questions.</p>
+			</div>
+			<div id="none" class="container well" style="display:none">
+				<h1>Sorry, no suitable modules running right now</h1>
+				<p>Sorry, we have no suitable modules you might be interested in right now.</p>
+				<p>We will continue to provide new modules which may be of interest to you. If you wish to register your interest and be notified when new modules/courses are opened, please fill in the form below.</p>
+				<div class="alert alert-error" style="display:none" id="noneError">
+					Please fill in all fields.
+				</div>
+				<form class="form-vertical" method="post" action="http://cgi.cse.unsw.edu.au/~samli/hs/submitinterest.cgi" enctype="multipart/form-data" id="noneform">
+					<input type="hidden" name="year" value="-1" style="display:none" id="noneyear">
+					<input type="hidden" name="experience" value="-1" style="display:none" id="noneexperience">
+					<fieldset>
+						<label>Your email address</label>
+						<div class="control-group">
+							<input type="text" name="email">
+						</div>
+						<center><input type="submit" value="Notify me later" class="btn btn-primary btn-large" id="noneSubmitBtn"></center>
+					</fieldset>
+				</form>
+			</div>
+			<div id="nonethanks" class="container well" style="display:none">
+				<h1>Thank you for registering your interest</h1>
+				<p>If you have any queries please send an email to <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">csesoc.computerclub@cse.unsw.edu.au</a>.</p>
+			</div>
+			<div id="hs1917none" class="container well" style="display:none">
+				<h1>Subscribe to new modules</h1>
+				<p>Sorry but we don't have any additional modules right now.</p>
+				<p>We will continue to provide new modules which may be of interest to you. If you wish to register your interest and be notified when new modules/courses are opened, please fill in the form below.</p>
+				<div class="alert alert-error" style="display:none" id="hsnoneError">
+					Please fill in all fields.
+				</div>
+				<form class="form-vertical" method="post" action="http://cgi.cse.unsw.edu.au/~samli/hs/submitinterest.cgi" enctype="multipart/form-data" id="hsnoneform">
+					<input type="hidden" name="year" value="-1" style="display:none" id="hsnoneyear">
+					<input type="hidden" name="experience" value="-1" style="display:none" id="hsnoneexperience">
+					<fieldset>
+						<label>Your email address</label>
+						<div class="control-group">
+							<input type="text" name="email">
+						</div>
+						<center><input type="submit" value="Notify me later" class="btn btn-primary btn-large" id="hsnoneSubmitBtn"></center>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		
+		<div id="jade" class="container well" style="display:none">
+			<h1>Jade made this</h1>
+		</div>
+		
+		<div id="jade2" class="container well" style="display:none">
+			<h1>Jade made this too</h1>
+		</div>
+		
+		<footer class="container">
+			<center>
+				Presented by <a href="http://www.csesoc.unsw.edu.au">UNSW CSESoc</a> and <a href="http://www.cse.unsw.edu.au/">CSE@UNSW</a>
+				&nbsp;|&nbsp; Contact us <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">here</a>
+			</center>
+		</footer>
+	</body>
 </html>
