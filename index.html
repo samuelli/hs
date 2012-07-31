@@ -28,6 +28,10 @@
 			$('#desc').slideUp();
 			$('#moreInfo').slideDown();
 		});
+		$("#whichBtn").click(function () {
+			$('#jade').slideUp();
+			$('#moreInfo').slideDown();
+		});
 		$("#findClassBtn").click(function () {
 			if ($('input[name=year]:checked').length == 0) {
 				$('#moreInfoError').slideDown();
@@ -297,135 +301,125 @@
 		<h1>Intro to Programming</h1>
 		<p>Our first course is aimed at introducing students with no prior knowledge of programming to good coding principles. Through this course, students will gain knowledge on the basics of code writing and how to approach problems and solve them with computers. Our approach is to present all this information through practical exercises, such as building small games and applications. </p>
 
-		<p>More specifically, at the end of this course students will feel confident with: 
-			variables, 
-			if-else conditionals, 
-			loops, 
-			functions, 
-			arithmetic in code, 
-			true-false statements, 
-			good coding style,
-			using libraries/modules/documentation,
-			classes
-			and the programming language Python.</p>
+		<p>More specifically, at the end of this course students will feel confident with: variables, if-else conditionals, loops, functions, arithmetic in code, true-false statements, good coding style, using libraries/modules/documentation, classes and the programming language Python.</p>
 
-			<p>We emphasize that this course is for students that have not previously programmed, and is paced so that these students have time to experiment with what they have learnt while also having time to ask questions.</p>
+		<p>We emphasize that this course is for students that have not previously programmed, and is paced so that these students have time to experiment with what they have learnt while also having time to ask questions.</p>
 
-			<h2>Details</h2>
-			<p><strong>When</strong>: Weekly, 4pm until 6pm, on a day that has yet to be confirmed. Starting the week 6th of August</p>
-			<p><strong>Where</strong>: Located in UNSW COMPUTING labs, K17</p>
-			<p><strong>What to bring</strong>: Students are not required to bring anything for the course but may want to have a notebook, pen or laptop for note taking and possibly an afternoon snack.</p>
-			<p><strong>Cost</strong>: Free!</p>
-			<h2>Register</h2>
-			<p>Register your interest in this module below. Some details about the workshop are yet to be confirmed and you will receive additional information shortly after registering.
-				<div class="alert alert-error" style="display:none" id="introError">
-					Please fill in all fields.
-				</div>
-				<form class="form-vertical" method="post" action="http://cgi.cse.unsw.edu.au/~samli/hs/submitintro.cgi" enctype="multipart/form-data" id="introform">
-					<input type="hidden" name="year" value="-1" style="display:none" id="introyear">
-					<input type="hidden" name="experience" value="-1" style="display:none" id="introexperience">
-					<fieldset>
-						<label>Your full name</label>
-						<div class="control-group">
-							<input type="text" name="name">
-						</div>
-						<label>Your gender</label>
-						<div class="control-group">
-							<ul style="list-style-type:none">
-								<li><input type="radio" name="gender" value="Male">Male</input></li>
-								<li><input type="radio" name="gender" value="Female">Female</input></li>
-							</ul>
-						</div>
-						<label>Your email address</label>
-						<div class="control-group">
-							<input type="text" name="email">
-						</div>
-						<label>High school currently attending</label>
-						<div class="control-group">
-							<input type="text" name="highschool">
-						</div>
-						<label>Emergency contact name</label>
-						<div class="control-group">
-							<input type="text" name="emergencyname">
-						</div>
-						<label>Emergency contact number</label>
-						<div class="control-group">
-							<input type="text" name="emergencynumber">
-						</div>
-						<label>Do you have access to a laptop that you can bring in?</label>
-						<div class="control-group">
-							<ul style="list-style-type:none">
-								<li><input type="radio" name="laptop" value="Yes">Yes</input></li>
-								<li><input type="radio" name="laptop" value="No">No</input></li>
-							</ul>
-						</div>
-						<center><input type="submit" value="Apply" class="btn btn-primary btn-large" id="introSubmitBtn"></center>
-					</fieldset>
-				</form>
+		<h2>Details</h2>
+		<p><strong>When</strong>: Weekly, 4pm until 6pm, on a day that has yet to be confirmed. Starting the week 6th of August</p>
+		<p><strong>Where</strong>: Located in UNSW COMPUTING labs, K17</p>
+		<p><strong>What to bring</strong>: Students are not required to bring anything for the course but may want to have a notebook, pen or laptop for note taking and possibly an afternoon snack.</p>
+		<p><strong>Cost</strong>: Free!</p>
+		<h2>Register</h2>
+		<p>Register your interest in this module below. Some details about the workshop are yet to be confirmed and you will receive additional information shortly after registering.
+			<div class="alert alert-error" style="display:none" id="introError">
+				Please fill in all fields.
 			</div>
-			<div id="introthanks" class="container well" style="display:none">
-				<h1>Thank you for registering, <span id="introthanksname"></span>!</h1>
-				<p>Thank for signing up to this workshop. You should receive an email shortly at <em><span id="introthanksemail"></span></em>.</p>
-				<p>If you have any queries or you do not receive an email please send an email to <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">csesoc.computerclub@cse.unsw.edu.au</a>.</p>
-			</div>
-			<div id="hs1917" class="container well" style="display:none">
-				<h1>UNSW Computing 1</h1>
-				<p>A limited number of talented high school students are offered the opportunity to enroll at UNSW and take COMP1917 entirely for <em>free</em>, our advanced first year university level course in computing.</p>
-				<p><em>Get a headstart</em> by completing this course which counts as university credit if you subsequently enroll at at UNSW Computing.</p>
-				<p>Find out more on this <a href="https://wiki.cse.unsw.edu.au/info/HS1917">webpage</a> and feel free to email <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">csesoc.computerclub@cse.unsw.edu.au</a> if you have any questions.</p>
-			</div>
-			<div id="none" class="container well" style="display:none">
-				<h1>Sorry, no suitable modules running right now</h1>
-				<p>Sorry, we have no suitable modules you might be interested in right now.</p>
-				<p>We will continue to provide new modules which may be of interest to you. If you wish to register your interest and be notified when new modules/courses are opened, please fill in the form below.</p>
-				<div class="alert alert-error" style="display:none" id="noneError">
-					Please fill in all fields.
-				</div>
-				<form class="form-vertical" method="post" action="http://cgi.cse.unsw.edu.au/~samli/hs/submitinterest.cgi" enctype="multipart/form-data" id="noneform">
-					<input type="hidden" name="year" value="-1" style="display:none" id="noneyear">
-					<input type="hidden" name="experience" value="-1" style="display:none" id="noneexperience">
-					<fieldset>
-						<label>Your email address</label>
-						<div class="control-group">
-							<input type="text" name="email">
-						</div>
-						<center><input type="submit" value="Notify me later" class="btn btn-primary btn-large" id="noneSubmitBtn"></center>
-					</fieldset>
-				</form>
-			</div>
-			<div id="nonethanks" class="container well" style="display:none">
-				<h1>Thank you for registering your interest</h1>
-				<p>If you have any queries please send an email to <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">csesoc.computerclub@cse.unsw.edu.au</a>.</p>
-			</div>
-			<div id="hs1917none" class="container well" style="display:none">
-				<h1>Subscribe to new modules</h1>
-				<p>Sorry but we don't have any additional modules right now.</p>
-				<p>We will continue to provide new modules which may be of interest to you. If you wish to register your interest and be notified when new modules/courses are opened, please fill in the form below.</p>
-				<div class="alert alert-error" style="display:none" id="hsnoneError">
-					Please fill in all fields.
-				</div>
-				<form class="form-vertical" method="post" action="http://cgi.cse.unsw.edu.au/~samli/hs/submitinterest.cgi" enctype="multipart/form-data" id="hsnoneform">
-					<input type="hidden" name="year" value="-1" style="display:none" id="hsnoneyear">
-					<input type="hidden" name="experience" value="-1" style="display:none" id="hsnoneexperience">
-					<fieldset>
-						<label>Your email address</label>
-						<div class="control-group">
-							<input type="text" name="email">
-						</div>
-						<center><input type="submit" value="Notify me later" class="btn btn-primary btn-large" id="hsnoneSubmitBtn"></center>
-					</fieldset>
-				</form>
-			</div>
+			<form class="form-vertical" method="post" action="http://cgi.cse.unsw.edu.au/~samli/hs/submitintro.cgi" enctype="multipart/form-data" id="introform">
+				<input type="hidden" name="year" value="-1" style="display:none" id="introyear">
+				<input type="hidden" name="experience" value="-1" style="display:none" id="introexperience">
+				<fieldset>
+					<label>Your full name</label>
+					<div class="control-group">
+						<input type="text" name="name">
+					</div>
+					<label>Your gender</label>
+					<div class="control-group">
+						<ul style="list-style-type:none">
+							<li><input type="radio" name="gender" value="Male">Male</input></li>
+							<li><input type="radio" name="gender" value="Female">Female</input></li>
+						</ul>
+					</div>
+					<label>Your email address</label>
+					<div class="control-group">
+						<input type="text" name="email">
+					</div>
+					<label>High school currently attending</label>
+					<div class="control-group">
+						<input type="text" name="highschool">
+					</div>
+					<label>Emergency contact name</label>
+					<div class="control-group">
+						<input type="text" name="emergencyname">
+					</div>
+					<label>Emergency contact number</label>
+					<div class="control-group">
+						<input type="text" name="emergencynumber">
+					</div>
+					<label>Do you have access to a laptop that you can bring in?</label>
+					<div class="control-group">
+						<ul style="list-style-type:none">
+							<li><input type="radio" name="laptop" value="Yes">Yes</input></li>
+							<li><input type="radio" name="laptop" value="No">No</input></li>
+						</ul>
+					</div>
+					<center><input type="submit" value="Apply" class="btn btn-primary btn-large" id="introSubmitBtn"></center>
+				</fieldset>
+			</form>
 		</div>
-		
-		<div id="jade" class="container well" style="display:none">
-			<h1>Current Courses</h1>
-			
-			<h2>Introduction to Programming</h2>
-			<p>Our first course is aimed at introducing students with no prior knowledge of programming to good coding principles. Through this course, students will gain knowledge on the basics of code writing and how to approach problems and solve them with computers. Our approach is to present all this information through practical exercises, such as building small games and applications. </p>
+		<div id="introthanks" class="container well" style="display:none">
+			<h1>Thank you for registering, <span id="introthanksname"></span>!</h1>
+			<p>Thank for signing up to this workshop. You should receive an email shortly at <em><span id="introthanksemail"></span></em>.</p>
+			<p>If you have any queries or you do not receive an email please send an email to <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">csesoc.computerclub@cse.unsw.edu.au</a>.</p>
+		</div>
+		<div id="hs1917" class="container well" style="display:none">
+			<h1>UNSW Computing 1</h1>
+			<p>A limited number of talented high school students are offered the opportunity to enroll at UNSW and take COMP1917 entirely for <em>free</em>, our advanced first year university level course in computing.</p>
+			<p><em>Get a head start</em> by completing this course which counts as university credit if you subsequently enroll at at UNSW Computing.</p>
+			<p>Find out more on this <a href="https://wiki.cse.unsw.edu.au/info/HS1917">webpage</a> and feel free to email <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">csesoc.computerclub@cse.unsw.edu.au</a> if you have any questions.</p>
+		</div>
+		<div id="none" class="container well" style="display:none">
+			<h1>Sorry, no suitable modules running right now</h1>
+			<p>Sorry, we have no suitable modules you might be interested in right now.</p>
+			<p>We will continue to provide new modules which may be of interest to you. If you wish to register your interest and be notified when new modules/courses are opened, please fill in the form below.</p>
+			<div class="alert alert-error" style="display:none" id="noneError">
+				Please fill in all fields.
+			</div>
+			<form class="form-vertical" method="post" action="http://cgi.cse.unsw.edu.au/~samli/hs/submitinterest.cgi" enctype="multipart/form-data" id="noneform">
+				<input type="hidden" name="year" value="-1" style="display:none" id="noneyear">
+				<input type="hidden" name="experience" value="-1" style="display:none" id="noneexperience">
+				<fieldset>
+					<label>Your email address</label>
+					<div class="control-group">
+						<input type="text" name="email">
+					</div>
+					<center><input type="submit" value="Notify me later" class="btn btn-primary btn-large" id="noneSubmitBtn"></center>
+				</fieldset>
+			</form>
+		</div>
+		<div id="nonethanks" class="container well" style="display:none">
+			<h1>Thank you for registering your interest</h1>
+			<p>If you have any queries please send an email to <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">csesoc.computerclub@cse.unsw.edu.au</a>.</p>
+		</div>
+		<div id="hs1917none" class="container well" style="display:none">
+			<h1>Subscribe to new modules</h1>
+			<p>Sorry but we don't have any additional modules right now.</p>
+			<p>We will continue to provide new modules which may be of interest to you. If you wish to register your interest and be notified when new modules/courses are opened, please fill in the form below.</p>
+			<div class="alert alert-error" style="display:none" id="hsnoneError">
+				Please fill in all fields.
+			</div>
+			<form class="form-vertical" method="post" action="http://cgi.cse.unsw.edu.au/~samli/hs/submitinterest.cgi" enctype="multipart/form-data" id="hsnoneform">
+				<input type="hidden" name="year" value="-1" style="display:none" id="hsnoneyear">
+				<input type="hidden" name="experience" value="-1" style="display:none" id="hsnoneexperience">
+				<fieldset>
+					<label>Your email address</label>
+					<div class="control-group">
+						<input type="text" name="email">
+					</div>
+					<center><input type="submit" value="Notify me later" class="btn btn-primary btn-large" id="hsnoneSubmitBtn"></center>
+				</fieldset>
+			</form>
+		</div>
+	</div>
 
-			<p>More specifically, at the end of this course students will feel confident with: variables, 
-				if-else conditionals, loops, functions, arithmetic in code, true-false statements, good coding style, using libraries/modules/documentation, classes and the programming language Python.</p>
+	<div id="jade" class="container well" style="display:none">
+		<h1>Current Courses</h1>
+
+		<h2>Introduction to Programming</h2>
+		<p>Our first course is aimed at introducing students with no prior knowledge of programming to good coding principles. Through this course, students will gain knowledge on the basics of code writing and how to approach problems and solve them with computers. Our approach is to present all this information through practical exercises, such as building small games and applications. </p>
+
+		<p>More specifically, at the end of this course students will feel confident with: variables, 
+			if-else conditionals, loops, functions, arithmetic in code, true-false statements, good coding style, using libraries/modules/documentation, classes and the programming language Python.</p>
 
 			<p>We emphasize that this course is for students that have not previously programmed, and is paced so that these students have time to experiment with what they have learnt while also having time to ask questions.</p>
 
@@ -433,25 +427,24 @@
 			<p><strong>When</strong>: Weekly, 4pm until 6pm, on a day that has yet to be confirmed. Starting the week 6th of August</p>
 			<p><strong>Where</strong>: Located in UNSW COMPUTING labs, K17</p>
 			<p><strong>What to bring</strong>: Students are not required to bring anything for the course but may want to have a notebook, pen or laptop for note taking and possibly an afternoon snack.</p>				
-			
+
 			<p><strong>Cost</strong>: Free!</p>
-			
+
 			<h2>UNSW Computing 1</h2>
 			<p>A limited number of talented high school students are offered the opportunity to enroll at UNSW and take COMP1917 entirely for <em>free</em>, our advanced first year university level course in computing.</p>
-			<p><em>Get a headstart</em> by completing this course which counts as university credit if you subsequently enroll at at UNSW Computing.</p>
+			<p><em>Get a head start</em> by completing this course which counts as university credit if you subsequently enroll at at UNSW Computing.</p>
 			<p>Find out more on this <a href="https://wiki.cse.unsw.edu.au/info/HS1917">webpage</a> and feel free to email <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">csesoc.computerclub@cse.unsw.edu.au</a> if you have any questions.</p>
-			
+
 			<h2>and still more to come.</h2>
 			<center>
-				<a class="btn btn-primary btn-large" href="#" id="interestedBtn">Which course is right for you?</a>
+				<a class="btn btn-primary btn-large" href="#" id="whichBtn">Which course is right for you?</a>
 			</center>
-			
 		</div>
-		
+
 		<div id="jade2" class="container well" style="display:none">
 			<h1>Jade made this too</h1>
 		</div>
-		
+
 		<footer class="container">
 			<center>
 				Presented by <a href="http://www.csesoc.unsw.edu.au">UNSW CSESoc</a> and <a href="http://www.cse.unsw.edu.au/">CSE@UNSW</a>
