@@ -58,6 +58,7 @@
 					$('#noneexperience').val(experience);
 					$('#none').slideDown();
 				}
+            $('#showall').slideDown();
 				$('#moreInfo').slideUp();
 			}
 			return false;
@@ -152,6 +153,7 @@
 			$('#hs1917none').slideUp();
 			$('#desc').slideUp();
 			$('#jade2').slideUp();
+         $('#showall').slideUp();
 			$('#jade').slideDown();
          $('#teacher').slideUp();
 		});
@@ -165,6 +167,7 @@
 			$('#hs1917none').slideUp();
 			$('#jade').slideUp();
 			$('#jade2').slideUp();
+         $('#showall').slideUp();
 			$('#info').slideUp();
 			$('#desc').slideDown();
          $('#teacher').slideUp();
@@ -180,6 +183,7 @@
 			$('#jade').slideUp();
 			$('#desc').slideUp();
 			$('#jade2').slideDown();
+         $('#showall').slideUp();
          $('#teacher').slideUp();
 		});
       $("#teachers").click(function () {
@@ -193,16 +197,21 @@
          $('#jade').slideUp();
          $('#desc').slideUp();
          $('#jade2').slideUp();
+         $('#showall').slideUp();
          $('#teacher').slideDown();
       });
 		$("#infoBack").click(function () {
 			$('#moreInfo').slideUp();
 			$('#desc').slideDown();
 		});
-
+      $("#showall").click(function () {
+         $('#intro').slideDown();
+         $('#hs1917').slideDown();
+         $('#showall').slideUp();
+      });
 	});
 	</script>
-	<style type="text/css">
+   <style type="text/css">
 	body {
 		font-family: "Open Sans";
 		font-weight: 300;
@@ -258,22 +267,43 @@
 		color:#FFB529;
 	}
 
-	img{
-		width:220px;
+	.heading img{
 		padding-right: 20px;
 		border-right: solid 2px #333;
 		margin-right: 18px;
 	}
 	#infoBack {
 		margin-right:20px;
-	}
+   }
 
+   #showall {
+      border: 2px dashed #CCC;
+      padding: 19px;
+      margin-bottom: 20px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 4px;
+      text-align: center;
+      color: #999;
+      font-size: 18px;
+      line-height: 27px;
+   }
+
+   #showall:hover {
+      background-color: white;
+      color: #333;
+   }
+
+   .heading h1 {
+      font-weight:400;
+      font-size: 48px;
+   }
 	</style>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 </head>
 <body> 
 	<div class="container well">
-		<header class="jumbotron subhead">
+		<header class="jumbotron subhead heading">
 
 			<h1><img src="https://my.unsw.edu.au/images-portal/unsw_logo.png">High School Computing Club</h1>
 			<!-- <p class="lead">Discover computing.</p> -->
@@ -281,8 +311,8 @@
 		<nav>
 			<ul>
 				<li><a href="#" id="home">Home</a></li>
+            <li><a href="#" id="about">About</a></li>
 				<li><a href="#" id="course">Courses</a></li>
-				<li><a href="#" id="about">About</a></li>
             <li><a href="#" id="teachers">Teachers</a></li>
 			</ul>
 		</nav>
@@ -290,13 +320,14 @@
 </div>
 
 <div id="desc" class="container well">
+   <img style="width:100%;padding-bottom:20px" src="bootstrap/img/splash.jpg"></img>
 	<p>The UNSW Computing Club is an initiative started by the students of UNSW's CSE School to help and educate high school students with an interest in computing. </p>
 
 	<p>Through the support of the club, high school students will be able to learn the basic skills of computing as well as broaden their understanding of the discipline. </p>
 
 	<p>Computing skills not only allow you to develop programs but they also build strong methodical and creative thinking, attributes that are valued not only in computing but also in many other aspects of their schooling and future careers.</p>
 	<center>
-		<a class="btn btn-primary btn-large" href="#" id="interestedBtn">I'm interested</a>
+		<a class="btn btn-primary btn-large" href="#" id="interestedBtn">Tell me more</a>
 	</center>
 </div>
 
@@ -487,7 +518,7 @@
          <div class="alert alert-error" style="display:none" id="teacherError">
             Please fill in all fields.
          </div>
-         <form class="form-vertical" method="post" action="http://cgi.cse.unsw.edu.au/~samli/hs/submitteacers.cgi" enctype="multipart/form-data" id="teacherform">
+         <form class="form-vertical" method="post" action="http://cgi.cse.unsw.edu.au/~samli/hs/submitteachers.cgi" enctype="multipart/form-data" id="teacherform">
             <fieldset>
                <label>Your full name</label>
                <div class="control-group">
@@ -513,6 +544,11 @@
             </fieldset>
          </form>
       </div>
+
+      <div id="showall" class="container" style="display:none">
+         Show me all modules anyway
+      </div>
+
 		<footer class="container">
 			<center>
 				Presented by <a href="http://www.csesoc.unsw.edu.au">UNSW CSESoc</a> and <a href="http://www.cse.unsw.edu.au/">CSE@UNSW</a>
