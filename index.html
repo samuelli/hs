@@ -20,6 +20,8 @@
 	$(document).ready(function () {
 		$('#introform').ajaxForm(function() {
 		});
+      $('#teacherform').ajaxForm(function() {
+      });
 		$('#noneform').ajaxForm(function() {
 		});
 		$('#hsnoneform').ajaxForm(function() {
@@ -85,6 +87,23 @@
 				$('#introthanks').slideDown();
 			}
 		});
+      $("#teacherSubmitBtn").click(function () {
+            var valid = true;
+            $.each($('#teacher input[type=text]'), function(i, v) {
+               if (v.value == '') {
+               $('#teacherError').slideDown();
+               $(v).parent().addClass('error');
+                  valid = false;
+                  return false;
+               } else {
+                  $(v).parent().removeClass('error');
+               }
+            });
+            if (valid) {
+               $('#teacher').slideUp();
+               $('#nonethanks').slideDown();
+            }
+      });
 		$("#noneSubmitBtn").click(function () {
 			var valid = true;
 			$.each($('#none input[type=text]'), function(i, v) {
@@ -134,6 +153,7 @@
 			$('#desc').slideUp();
 			$('#jade2').slideUp();
 			$('#jade').slideDown();
+         $('#teacher').slideUp();
 		});
 		$("#home").click(function () {
 			$('#intro').slideUp();
@@ -147,6 +167,7 @@
 			$('#jade2').slideUp();
 			$('#info').slideUp();
 			$('#desc').slideDown();
+         $('#teacher').slideUp();
 		});
 		$("#about").click(function () {
 			$('#intro').slideUp();
@@ -159,7 +180,21 @@
 			$('#jade').slideUp();
 			$('#desc').slideUp();
 			$('#jade2').slideDown();
+         $('#teacher').slideUp();
 		});
+      $("#teachers").click(function () {
+         $('#intro').slideUp();
+         $('#introthanks').slideUp();
+         $('#none').slideUp();
+         $('#nonethanks').slideUp();
+         $('#moreInfo').slideUp();
+         $('#hs1917').slideUp();
+         $('#hs1917none').slideUp();
+         $('#jade').slideUp();
+         $('#desc').slideUp();
+         $('#jade2').slideUp();
+         $('#teacher').slideDown();
+      });
 		$("#infoBack").click(function () {
 			$('#moreInfo').slideUp();
 			$('#desc').slideDown();
@@ -248,6 +283,7 @@
 				<li><a href="#" id="home">Home</a></li>
 				<li><a href="#" id="course">Courses</a></li>
 				<li><a href="#" id="about">About</a></li>
+            <li><a href="#" id="teachers">Teachers</a></li>
 			</ul>
 		</nav>
 	</div>
@@ -360,13 +396,13 @@
 		<div id="introthanks" class="container well" style="display:none">
 			<h1>Thank you for registering, <span id="introthanksname"></span>!</h1>
 			<p>Thank for signing up to this workshop. You should receive an email shortly at <em><span id="introthanksemail"></span></em>.</p>
-			<p>If you have any queries or you do not receive an email please send an email to <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">csesoc.computerclub@cse.unsw.edu.au</a>.</p>
+			<p>If you have any queries or you do not receive an email please send an email to <a href="mailto:csesoc.compclub@cse.unsw.edu.au">csesoc.compclub@cse.unsw.edu.au</a>.</p>
 		</div>
 		<div id="hs1917" class="container well" style="display:none">
 			<h1>UNSW Computing 1</h1>
 			<p>A limited number of talented high school students are offered the opportunity to enroll at UNSW and take COMP1917 entirely for <em>free</em>, our advanced first year university level course in computing.</p>
 			<p><em>Get a head start</em> by completing this course which counts as university credit if you subsequently enroll at at UNSW Computing.</p>
-			<p>Find out more on this <a href="https://wiki.cse.unsw.edu.au/info/HS1917">webpage</a> and feel free to email <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">csesoc.computerclub@cse.unsw.edu.au</a> if you have any questions.</p>
+			<p>Find out more on this <a href="https://wiki.cse.unsw.edu.au/info/HS1917">webpage</a> and feel free to email <a href="mailto:csesoc.compclub@cse.unsw.edu.au">csesoc.compclub@cse.unsw.edu.au</a> if you have any questions.</p>
 		</div>
 		<div id="none" class="container well" style="display:none">
 			<h1>Sorry, no suitable modules running right now</h1>
@@ -389,7 +425,7 @@
 		</div>
 		<div id="nonethanks" class="container well" style="display:none">
 			<h1>Thank you for registering your interest</h1>
-			<p>If you have any queries please send an email to <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">csesoc.computerclub@cse.unsw.edu.au</a>.</p>
+			<p>If you have any queries please send an email to <a href="mailto:csesoc.compclub@cse.unsw.edu.au">csesoc.compclub@cse.unsw.edu.au</a>.</p>
 		</div>
 		<div id="hs1917none" class="container well" style="display:none">
 			<h1>Subscribe to new modules</h1>
@@ -433,7 +469,7 @@
 			<h2>UNSW Computing 1</h2>
 			<p>A limited number of talented high school students are offered the opportunity to enroll at UNSW and take COMP1917 entirely for <em>free</em>, our advanced first year university level course in computing.</p>
 			<p><em>Get a head start</em> by completing this course which counts as university credit if you subsequently enroll at at UNSW Computing.</p>
-			<p>Find out more on this <a href="https://wiki.cse.unsw.edu.au/info/HS1917">webpage</a> and feel free to email <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">csesoc.computerclub@cse.unsw.edu.au</a> if you have any questions.</p>
+			<p>Find out more on this <a href="https://wiki.cse.unsw.edu.au/info/HS1917">webpage</a> and feel free to email <a href="mailto:csesoc.compclub@cse.unsw.edu.au">csesoc.compclub@cse.unsw.edu.au</a> if you have any questions.</p>
 
 			<h2>and still more to come.</h2>
 			<center>
@@ -445,10 +481,42 @@
 			<h1>Jade made this too</h1>
 		</div>
 
+      <div id="teacher" class="container well" style="display:none">
+         <h1>Teachers</h1>
+         <p>Register for more regular updates regarding Computing Club.</p>
+         <div class="alert alert-error" style="display:none" id="teacherError">
+            Please fill in all fields.
+         </div>
+         <form class="form-vertical" method="post" action="http://cgi.cse.unsw.edu.au/~samli/hs/submitteacers.cgi" enctype="multipart/form-data" id="teacherform">
+            <fieldset>
+               <label>Your full name</label>
+               <div class="control-group">
+                  <input type="text" name="name">
+               </div>
+               <label>Your email address</label>
+               <div class="control-group">
+                  <input type="text" name="email">
+               </div>
+               <label>Contact number</label>
+               <div class="control-group">
+                  <input type="text" name="number">
+               </div>
+               <label>High school teaching at</label>
+               <div class="control-group">
+                  <input type="text" name="highschool">
+               </div>
+               <label>Suburb/city located in</label>
+               <div class="control-group">
+                  <input type="text" name="city">
+               </div>
+               <center><input type="submit" value="Register" class="btn btn-primary btn-large" id="teacherSubmitBtn"></center>
+            </fieldset>
+         </form>
+      </div>
 		<footer class="container">
 			<center>
 				Presented by <a href="http://www.csesoc.unsw.edu.au">UNSW CSESoc</a> and <a href="http://www.cse.unsw.edu.au/">CSE@UNSW</a>
-				&nbsp;|&nbsp; Contact us <a href="mailto:csesoc.computerclub@cse.unsw.edu.au">here</a>
+				&nbsp;|&nbsp; Contact us <a href="mailto:csesoc.compclub@cse.unsw.edu.au">here</a>
 			</center>
 		</footer>
 	</body>
