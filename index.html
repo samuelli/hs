@@ -20,6 +20,8 @@
 	$(document).ready(function () {
 		$('#introform').ajaxForm(function() {
 		});
+      $('#adventureform').ajaxForm(function() {
+      });
 		$('#teacherform').ajaxForm(function() {
 		});
 		$('#noneform').ajaxForm(function() {
@@ -44,11 +46,16 @@
 			} else {
 				var year = $('input[name=year]:checked').val();
 				var experience = $('input[name=experience]:checked').val();
-				if (year >= 10 && experience!='beginner') {
-					$('#hs1917').slideDown();
+            if (year >= 9 && experience!='beginner') {
+               $('#adventure').slideDown();
+               if (year > 9) {
+                  $('#hs1917').slideDown();
+               }
 					$('#hsnoneyear').val(year);
 					$('#hsnoneexperience').val(experience);
-					$('#hs1917none').slideDown();
+               $('#adventureyear').val(year);
+               $('#adventureexperience').val(experience);
+					//$('#hs1917none').slideDown();
 				} else if (experience=='beginner') {
 					$('#intro').slideDown();
 					$('#introyear').val(year);
@@ -88,6 +95,32 @@
 				$('#introthanks').slideDown();
 			}
 		});
+      $("#adventureSubmitBtn").click(function () {
+            var valid = true;
+            $.each($('#adventure input[type=text]'), function(i, v) {
+               if (v.value == '') {
+               $('#adventureError').slideDown();
+               $(v).parent().addClass('error');
+               valid = false;
+               return false;
+               } else {
+               $(v).parent().removeClass('error');
+               }
+               });
+            if ($('#adventure input[name=gender]:checked').length == 0
+               || $('#adventure input[name=laptop]:checked').length == 0) {
+            $('#adventureError').slideDown();
+            valid = false;
+            return false;
+            }
+            if (valid) {
+            $('#adventure').slideUp();
+            $('#hs1917').slideUp();
+            $('#introthanksemail').html($('#adventure input[name=email]').val());
+            $('#introthanksname').html($('#adventure input[name=name]').val());
+            $('#introthanks').slideDown();
+            }
+      });
 		$("#teacherSubmitBtn").click(function () {
 			var valid = true;
 			$.each($('#teacher input[type=text]'), function(i, v) {
@@ -146,6 +179,7 @@
 		$("#course").click(function () {
 			$('#intro').slideUp();
 			$('#introthanks').slideUp();
+         $('#adventure').slideUp();
 			$('#none').slideUp();
 			$('#nonethanks').slideUp();
 			$('#moreInfo').slideUp();
@@ -159,6 +193,7 @@
 		});
 		$("#home").click(function () {
 			$('#intro').slideUp();
+         $('#adventure').slideUp();
 			$('#introthanks').slideUp();
 			$('#none').slideUp();
 			$('#nonethanks').slideUp();
@@ -174,6 +209,7 @@
 		});
 		$("#about").click(function () {
 			$('#intro').slideUp();
+         $('#adventure').slideUp();
 			$('#introthanks').slideUp();
 			$('#none').slideUp();
 			$('#nonethanks').slideUp();
@@ -188,6 +224,7 @@
 		});
 		$("#teachers").click(function () {
 			$('#intro').slideUp();
+         $('#adventure').slideUp();
 			$('#introthanks').slideUp();
 			$('#none').slideUp();
 			$('#nonethanks').slideUp();
@@ -206,6 +243,7 @@
 		});
 		$("#showall").click(function () {
 			$('#intro').slideDown();
+         $('#adventure').slideDown();
 			$('#hs1917').slideDown();
 			$('#showall').slideUp();
 		});
@@ -364,15 +402,17 @@
 
 	<div id="intro" class="container well" style="display:none">
 		<h1>Intro to Programming</h1>
-		<p>Introduction to Programming is designed for students that are interested in computer science but have not yet started programming. In the course, students will program in Python and start to create apps that will teach them the basics of computer coding. </p>
+		<p>Introduction to Programming is designed for students that are interested in computer science but have not yet started programming. In the course, students will learn to program in Python and start to create apps that will teach them the basics of computer coding. </p>
 
 		<h2>Details</h2>
-		<p><strong>When</strong>: Weekly, 4pm until 6pm, on a day that has yet to be confirmed. Starting the week 6th of August</p>
-		<p><strong>Where</strong>: Located in UNSW COMPUTING labs, K17</p>
+      <p><strong>Difficulty</strong>: Beginner</p>
+      <p><strong>Programming Languages</strong>: Python</p>
+      <p><strong>When</strong>: Mondays from 4-6.30pm, starting on 13th August</p>
+      <p><strong>Length</strong>: 9 weeks</p>
+      <p><strong>Where</strong>: Banjo lab, K17, UNSW campus</p>
 		<p><strong>What to bring</strong>: Students are not required to bring anything for the course but may want to have a notebook, pen or laptop for note taking and possibly an afternoon snack.</p>
-		<p><strong>Cost</strong>: Free!</p>
+      <p><strong>Cost</strong>: Free!</p>
 		<h2>Register</h2>
-		<p>Register your interest in this module below. Some details about the workshop are yet to be confirmed and you will receive additional information shortly after registering.
 			<div class="alert alert-error" style="display:none" id="introError">
 				Please fill in all fields.
 			</div>
@@ -423,6 +463,63 @@
 			<p>Thank for signing up to this workshop. You should receive an email shortly at <em><span id="introthanksemail"></span></em>.</p>
 			<p>If you have any queries or you do not receive an email please send an email to <a href="mailto:csesoc.compclub@cse.unsw.edu.au">csesoc.compclub@cse.unsw.edu.au</a>.</p>
 		</div>
+      <div id="adventure" class="container well" style="display:none">
+         <h1>Adventures in Recreational Computer Science</h1>
+         <p>ARCS is designed to show students that there is more to computer science than just learning how to program. Each week will feature a different topic, and each week will stand independent of the rest - so if you have to miss a week, don't worry! Exactly what we will cover will depend on what the students want to know, though our initial range of topics includes: How to win programming competitions, Computer security, Computer graphics, Artificial Intelligence, and Maze generation. </p>
+         <h2>Details</h2>
+         <p><strong>Difficulty</strong>: Intermediate or expert</p>
+         <p><strong>Programming Languages</strong>: All</p>
+         <p><strong>When</strong>: Mondays from 4-7pm, starting on 13th August</p>
+         <p><strong>Length</strong>: 9 weeks</p>
+         <p><strong>Where</strong>: Seminar Room, K17, UNSW campus</p>
+         <p><strong>What to bring</strong>: Students are not required to bring anything for the course but laptops are preferable</p>
+         <p><strong>Cost</strong>: Free!</p>
+         <h2>Register</h2>
+         <div class="alert alert-error" style="display:none" id="adventureError">
+            Please fill in all fields.
+         </div>
+         <form class="form-vertical" method="post" action="http://cgi.cse.unsw.edu.au/~samli/hs/submitadventure.cgi" enctype="multipart/form-data" id="adventureform">
+            <input type="hidden" name="year" value="-1" style="display:none" id="adventureyear">
+            <input type="hidden" name="experience" value="-1" style="display:none" id="adventureexperience">
+            <fieldset>
+               <label>Your full name</label>
+               <div class="control-group">
+                  <input type="text" name="name">
+               </div>
+               <label>Your gender</label>
+               <div class="control-group">
+                  <ul style="list-style-type:none">
+                     <li><input type="radio" name="gender" value="Male">Male</input></li>
+                     <li><input type="radio" name="gender" value="Female">Female</input></li>
+                  </ul>
+               </div>
+               <label>Your email address</label>
+               <div class="control-group">
+                  <input type="text" name="email">
+               </div>
+               <label>High school currently attending</label>
+               <div class="control-group">
+                  <input type="text" name="highschool">
+               </div>
+               <label>Emergency contact name</label>
+               <div class="control-group">
+                  <input type="text" name="emergencyname">
+               </div>
+               <label>Emergency contact number</label>
+               <div class="control-group">
+                  <input type="text" name="emergencynumber">
+               </div>
+               <label>Do you have access to a laptop that you can bring in?</label>
+               <div class="control-group">
+                  <ul style="list-style-type:none">
+                     <li><input type="radio" name="laptop" value="Yes">Yes</input></li>
+                     <li><input type="radio" name="laptop" value="No">No</input></li>
+                  </ul>
+               </div>
+               <center><input type="submit" value="Apply" class="btn btn-primary btn-large" id="adventureSubmitBtn"></center>
+            </fieldset>
+         </form>
+      </div>
 		<div id="hs1917" class="container well" style="display:none">
 			<h1>UNSW Computing 1</h1>
 			<p>A limited number of talented high school students are offered the opportunity to enroll at UNSW and take COMP1917 entirely for <em>free</em>, our advanced first year university level course in computing.</p>
